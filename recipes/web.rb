@@ -4,11 +4,22 @@ basedir = node['graphite']['base_dir']
 version = node['graphite']['version']
 pyver = node['graphite']['python_version']
 
-package "python-cairo-dev"
-package "python-django"
-package "python-django-tagging"
-package "python-memcache"
-package "python-rrdtool"
+if platform_family?('rhel')
+  package "pycairo-devel"
+  package "Django"
+  package "django-tagging"
+  package "python-memcached"
+  package "rrdtool-python"
+  service "iptables" do
+    action :stop
+  end
+else
+  package "python-cairo-dev"
+  package "python-django"
+  package "python-django-tagging"
+  package "python-memcache"
+  package "python-rrdtool"  
+end
 
 remote_file "/usr/src/graphite-web-#{version}.tar.gz" do
   source node['graphite']['graphite_web']['uri']
