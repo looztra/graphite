@@ -33,6 +33,10 @@ end
 
 apache_site "graphite"
 
+apache_site "000-default" do
+  enable false
+end
+
 directory "#{basedir}/storage" do
   owner node['apache']['user']
   group node['apache']['group']
