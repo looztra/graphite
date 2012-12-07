@@ -1,0 +1,37 @@
+#!/bin/sh
+#
+#
+# chkconfig: - 64 36
+# description: Carbon Cache Graphite component
+# processname: carbon-cache
+
+
+case $1 in
+start)
+        echo -n "Starting carbon-cache: "
+        <%= node['graphite']['base_dir']%>/bin/carbon-cache.py start
+        echo
+        ;;
+stop)
+        echo -n "Stopping carbon-cache: "
+        <%= node['graphite']['base_dir']%>/bin/carbon-cache.py stop
+        echo
+        ;;
+status)
+        <%= node['graphite']['base_dir']%>/bin/carbon-cache.py status
+        ;;
+
+
+restart)
+        echo -n "Stopping carbon-cache: "
+        <%= node['graphite']['base_dir']%>/bin/carbon-cache.py stop
+        echo
+        echo -n "Starting carbon-cache: "
+        <%= node['graphite']['base_dir']%>/bin/carbon-cache.py start
+        echo
+        ;;
+*)
+        echo "Usage: $0 {start|stop|restart|status}"
+        ;;
+
+esac
