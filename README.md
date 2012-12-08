@@ -3,12 +3,18 @@ Description
 
 Installs and configures Graphite http://graphite.wikidot.com/
 
+Defaults
+========
+
+* python 2.7
+
 Requirements
 ============
 
-* Ubuntu 10.04 (Lucid) - with default settings
-* Ubuntu 11.10 (Oneiric) - change node[:graphite][:python_version] to "2.7"
-* Centos 6.3 - change default['graphite']['carbon']['service_type'] = "standalone"
+* Ubuntu 10.04 (Lucid) - change node['graphite']['python_version'] to "2.6"
+* Ubuntu 11.10 (Oneiric) - with defaults
+* Ubuntu 12.04 - with defaults
+* Centos 6.3 - change default['graphite']['carbon']['service_type'] to "standalone"
 
 Attributes
 ==========
