@@ -4,21 +4,23 @@ basedir = node['graphite']['base_dir']
 version = node['graphite']['version']
 pyver = node['graphite']['python_version']
 
+py_package_names = value_for_platform(
+  ["centos" ] => {
+    "default" => ["pycairo-devel","Django","django-tagging","python-memcached","rrdtool-python"],
+  },
+  ["ubuntu"] => {
+    "default" => ["python-cairo-dev","python-django","python-django-tagging","python-memcache","python-rrdtool"]
+  }
+)
+
+py_package_names.each do |pkg|
+  package pkg
+end
+
 if platform_family?('rhel')
-  package "pycairo-devel"
-  package "Django"
-  package "django-tagging"
-  package "python-memcached"
-  package "rrdtool-python"
   service "iptables" do
     action :stop
   end
-else
-  package "python-cairo-dev"
-  package "python-django"
-  package "python-django-tagging"
-  package "python-memcache"
-  package "python-rrdtool"  
 end
 
 remote_file "/usr/src/graphite-web-#{version}.tar.gz" do
