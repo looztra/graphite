@@ -1,5 +1,6 @@
-package "python-twisted"
-package "python-simplejson"
+%w{ python-twisted python-simplejson}.each do |pkg|
+  package pkg
+end
 
 version = node['graphite']['version']
 pyver = node['graphite']['python_version']
